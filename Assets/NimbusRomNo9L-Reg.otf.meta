@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 6a54018f96ba4ba43b9cce4198aeca2c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Nimbus Roman No9 L
+  fontNames:
+  - Nimbus Roman No9 L
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4e37c4c2c1d29684c94718e4d3f8e70e, type: 3}
+  - {fileID: 12800000, guid: 48fe0869cb26eb54da2cffad4614c373, type: 3}
+  - {fileID: 12800000, guid: 4bcc7d99133204b428ec32351c1113a0, type: 3}
+  - {fileID: 12800000, guid: 2fe7dd4c2563c6647b26b5934c0e9c5e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
