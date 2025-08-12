@@ -390,14 +390,40 @@ public class GrandGrimoireScript : MonoBehaviour
     }
 
 #pragma warning disable 414
-    private string TwitchHelpMessage = "Use '!{0} godoor famalia dagger' to perform the specified actions.";
+    private string TwitchHelpMessage = "Use '!{0} godoor' to view the spell Godoor. Use '!{0} cast' to cast the spell on the currently viewed page. Use '!{0} dagger' to use the dagger. These commands can be chained with spaces (e.g. godoor cast dagger ignaize cast). Use '!{0} cycle' to display the order of the spells.";
 #pragma warning restore 414
 
     IEnumerator ProcessTwitchCommand(string command)
     {
         command = command.ToLowerInvariant();
+
+        if (command == "cycle")
+        {
+            yield return null;
+            if (Page > 0)
+            {
+                while (Page > 0)
+                {
+                    Buttons[0].OnInteract();
+                    yield return new WaitForSeconds(0.1f);
+                }
+                yield return new WaitForSeconds(1.5f);
+            }
+            while (Page < 6)
+            {
+                Buttons[1].OnInteract();
+                yield return new WaitForSeconds(1.5f);
+            }
+            while (Page > 0)
+            {
+                Buttons[0].OnInteract();
+                yield return new WaitForSeconds(0.1f);
+            }
+            yield break;
+        }
+
         var commandArray = command.Split(' ');
-        var validcmds = new[] { "ignaize", "dimere", "goldor", "famalia", "godoor", "fainfol", "granwyrm", "dagger" };
+        var validcmds = new[] { "ignaize", "dimere", "goldor", "famalia", "godoor", "fainfol", "granwyrm", "dagger", "cast" };
 
         for (int i = 0; i < commandArray.Length; i++)
         {
@@ -413,6 +439,9 @@ public class GrandGrimoireScript : MonoBehaviour
             if (commandArray[i] == "dagger")
                 Buttons[3].OnInteract();
             else
+            if (commandArray[i] == "cast")
+                Buttons[2].OnInteract();
+            else
             {
                 var targetPage = BookContents.IndexOf(Array.IndexOf(validcmds, commandArray[i]));
                 if (targetPage != Page)
@@ -424,9 +453,8 @@ public class GrandGrimoireScript : MonoBehaviour
                         yield return new WaitForSeconds(0.1f);
                     }
                 }
-                Buttons[2].OnInteract();
-                yield return new WaitForSeconds(0.2f);
             }
+            yield return new WaitForSeconds(0.2f);
         }
     }
     IEnumerator TwitchHandleForcedSolve()
